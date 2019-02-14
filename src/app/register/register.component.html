@@ -1,0 +1,82 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>{{mode}}</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"  method="post" enctype="multipart/form-data">
+      <div class="form-group" [ngClass]="{'has-error': (registerForm.get('firstName').touched ||
+                                                        registerForm.get('firstName').dirty) &&
+                                                        registerForm.get('firstName').invalid}">
+        <label class="control-label" for="firstName">First name</label>
+        <input id="firstName" formControlName="firstName" name="firstName" class="form-control" placeholder="first name">
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': (registerForm.get('lastName').touched ||
+                                                        registerForm.get('lastName').dirty) &&
+                                                        registerForm.get('lastName').invalid}">
+        <label class="control-label" for="lastName">Last name</label>
+        <input id="lastName" formControlName="lastName" name="lastName" class="form-control" placeholder="last name">
+      </div>
+        
+      <div class="form-group" [ngClass]="{'has-error': (registerForm.get('email').touched ||
+                                            registerForm.get('email').dirty) &&
+                                            (registerForm.get('email').invalid) || duplicatedEmail}">
+        <label class="control-label" for="email">email</label>
+        
+        <input class="form-control"
+                id = "email"
+                type="text"
+                placeholder="email"
+                name="email"
+                formControlName="email">
+        <div  class="alert alert-danger" *ngIf="(registerForm.get('email').touched ||
+                                          registerForm.get('email').dirty) &&
+                                          (registerForm.get('email').errors) || duplicatedEmail">
+            <span *ngIf="registerForm.get('email').errors.required">Please enter email</span>
+            <span *ngIf="registerForm.get('email').errors.pattern">Please enter valid email</span>
+        </div>
+      </div>
+    
+    
+      <div class="form-group" [ngClass]="{'has-error': (registerForm.get('password').touched ||
+                                                        registerForm.get('password').dirty) &&
+                                                        (registerForm.get('password').invalid)}">
+        <label class="control-label" for="password">password</label>
+        <input class="form-control"
+                id = "password"
+                type="password"
+                placeholder="password"
+                name="password"
+                formControlName="password">
+        <div  class="alert alert-danger" *ngIf="(registerForm.get('password').touched ||
+                                                registerForm.get('password').dirty) &&
+                                                (registerForm.get('password').errors)">
+          <span *ngIf="registerForm.get('password').errors.required">Please enter password</span>
+        </div>
+      </div>
+  
+      <div class="form-group" [ngClass]="{'has-error': (registerForm.get('confirmPassword').touched ||
+                                                          registerForm.get('confirmPassword').dirty) &&
+                                                          (registerForm.get('confirmPassword').invalid)}">
+        <label class="control-label" for="confirmPassword">confirm password</label>
+        <input class="form-control"
+                id = "confirmPassword"
+                type="password"
+                placeholder="confirm password"
+                name="confirmPassword"
+                formControlName="confirmPassword">
+        <div  class="alert alert-danger" *ngIf="(registerForm.get('confirmPassword').touched ||
+                                                  registerForm.get('confirmPassword').dirty) &&
+                                                  (registerForm.get('confirmPassword').errors)">
+          <span *ngIf="registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').errors.ConfirmPassword">password does not match</span>
+          
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Save</button>
+        <a [routerLink]="['/login']" class="btn btn-link" >Abbrechen</a>
+      </div>
+    </form>
+    
+    
+    
+  </div>
+</div>

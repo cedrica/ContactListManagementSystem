@@ -1,0 +1,41 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+        <h1>
+            <span>User List</span> 
+            <a [routerLink]="['/add-user']" class="btn btn-success pull-right" *ngIf="loggedRole == 'admin'">ADD USER</a>
+        </h1>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <th>id</th>
+          <th>first name</th>
+          <th>last name</th>
+          <th>email</th>
+          <th>role</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td><img  src="assets/{{user.image}}" style="width:100px;height:100px"/></td>
+            <td>
+              {{user.firstName}}
+            </td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td><a class="fa fa-close" style="color:red" (click)="deleteUser(user)"></a></td>
+            <td><a  class="fa fa-edit" style="color:darkorange" [routerLink]="['/edit-user', user._id]"></a></td>
+        
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+

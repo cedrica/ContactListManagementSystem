@@ -9,6 +9,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
   "private": true,
   "dependencies": {
     "@angular/animations": "~7.2.0",
@@ -20,7 +24,11 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "core-js": "^2.5.4",
-    "rxjs": "~6.3.3",
+    "font-awesome": "^4.7.0",
+    "http-client": "^4.3.1",
+    "ionic-angular": "^3.9.2",
+    "ngx-popover": "0.0.16",
+    "rxjs-compat": "^6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

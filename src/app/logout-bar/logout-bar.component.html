@@ -1,0 +1,4 @@
+<div style="width:100%; background: #333; height: 50px; margin-bottom:20px; padding: 10px 10px 0 30%" [hidden]="showNavBar">
+  <span class="fa fa-user" style="font-size: 20px; color: greenyellow; margin-right: 5px"></span> <i style="color:#fff">you are logged as</i> <b> <a  style="color:darkorange" [routerLink]="['/user']" [queryParams]="{role: loggedRole}"> {{loggedRole}}</a></b>
+  <a [routerLink] ="['/login']" class="fa fa-sign-out pull-right" style="font-size: 30px; color: #fff"></a>
+</div>

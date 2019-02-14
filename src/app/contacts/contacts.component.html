@@ -1,0 +1,35 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+          <h1>
+              <span>My Contact List</span> 
+              <a  [routerLink]="['/create-contact']" class="btn btn-success pull-right" *ngIf="loggedRole == 'user'">CREATE CONTACT</a>
+          </h1>
+    </div>
+    <div class="panel-body">
+
+<div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>id</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>email</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contacts">
+          <td>{{contact._id}}</td>
+          <td>{{contact.firstName}}</td>
+          <td>{{contact.lastName}}</td>
+          <td>{{contact.email}}</td>
+          <td><a class="fa fa-close" style="color:red" (click)="deleteContact(contact)"></a></td>
+          <td><a  class="fa fa-edit" style="color:darkorange" [routerLink]="['/edit-contact', contact._id]"></a></td>          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+    </div>
+</div>

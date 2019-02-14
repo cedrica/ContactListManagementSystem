@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>Create contact</h2>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div class="form-group" [ngClass]="{'has-error': (contactForm.get('firstName').touched ||
+                                                        contactForm.get('firstName').dirty) &&
+                                                        contactForm.get('firstName').invalid}">
+        <label class="control-label" for="firstName">First name</label>
+        <input id="firstName" formControlName="firstName" name="firstName" class="form-control" placeholder="first name">
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': (contactForm.get('lastName').touched ||
+                                                        contactForm.get('lastName').dirty) &&
+                                                        contactForm.get('lastName').invalid}">
+        <label class="control-label" for="lastName">Last name</label>
+        <input id="lastName" formControlName="lastName" name="lastName" class="form-control" placeholder="last name">
+      </div>
+        
+      <div class="form-group" [ngClass]="{'has-error': (contactForm.get('email').touched ||
+                                            contactForm.get('email').dirty) &&
+                                            (contactForm.get('email').invalid) || duplicatedEmail}">
+        <label class="control-label" for="email">email</label>
+        
+        <input class="form-control"
+                id = "email"
+                type="text"
+                placeholder="email"
+                name="email"
+                formControlName="email">
+        <div  class="alert alert-danger" *ngIf="(contactForm.get('email').touched ||
+                                          contactForm.get('email').dirty) &&
+                                          (contactForm.get('email').errors) || duplicatedEmail">
+            <span *ngIf="contactForm.get('email').errors.required">Please enter email</span>
+            <span *ngIf="contactForm.get('email').errors.pattern">Please enter valid email</span>
+        </div>
+      </div>
+      <input type="hidden" formControlName="createdBy" name="createdBy">
+      
+      <div class="form-group">
+        <button type="submit" [disabled]="contactForm.invalid" class="btn btn-primary">Save</button>
+        <a [routerLink]="['/contacts']" class="btn btn-link"  *ngIf="isCreateContact">Abbrechen</a>
+        <a [routerLink]="['/contacts']" class="btn btn-link"  *ngIf="isEditMode">Abbrechen</a>
+      </div>
+    </form>
+    
+    
+    
+  </div>
+</div>

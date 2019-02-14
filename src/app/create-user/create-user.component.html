@@ -1,0 +1,102 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>{{mode}}</h2>
+    <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()"  method="post" enctype="multipart/form-data">
+      <div class="form-group" [ngClass]="{'has-error': (createUserForm.get('firstName').touched ||
+                                                        createUserForm.get('firstName').dirty) &&
+                                                        createUserForm.get('firstName').invalid}">
+        <label class="control-label" for="firstName">First name</label>
+        <input id="firstName" formControlName="firstName" name="firstName" class="form-control" placeholder="first name">
+      </div>
+      <div class="form-group" [ngClass]="{'has-error': (createUserForm.get('lastName').touched ||
+                                                        createUserForm.get('lastName').dirty) &&
+                                                        createUserForm.get('lastName').invalid}">
+        <label class="control-label" for="lastName">Last name</label>
+        <input id="lastName" formControlName="lastName" name="lastName" class="form-control" placeholder="last name">
+      </div>
+        
+      <div class="form-group" [ngClass]="{'has-error': (createUserForm.get('email').touched ||
+                                            createUserForm.get('email').dirty) &&
+                                            (createUserForm.get('email').invalid) || duplicatedEmail}">
+        <label class="control-label" for="email">email</label>
+        
+        <input class="form-control"
+                id = "email"
+                type="text"
+                placeholder="email"
+                name="email"
+                formControlName="email">
+        <div  class="alert alert-danger" *ngIf="(createUserForm.get('email').touched ||
+                                          createUserForm.get('email').dirty) &&
+                                          (createUserForm.get('email').errors) || duplicatedEmail">
+            <span *ngIf="createUserForm.get('email').errors.required">Please enter email</span>
+            <span *ngIf="createUserForm.get('email').errors.pattern">Please enter valid email</span>
+        </div>
+      </div>
+    
+    
+        <div class="form-group" [ngClass]="{'has-error': (createUserForm.get('password').touched ||
+                                                          createUserForm.get('password').dirty) &&
+                                                          (createUserForm.get('password').invalid)}">
+          <label class="control-label" for="password">password</label>
+          <input class="form-control"
+                  id = "password"
+                  type="password"
+                  placeholder="password"
+                  name="password"
+                  formControlName="password">
+          <div  class="alert alert-danger" *ngIf="(createUserForm.get('password').touched ||
+                                                  createUserForm.get('password').dirty) &&
+                                                  (createUserForm.get('password').errors)">
+            <span *ngIf="createUserForm.get('password').errors.required">Please enter password</span>
+          </div>
+        </div>
+    
+        <div class="form-group" [ngClass]="{'has-error': (createUserForm.get('confirmPassword').touched ||
+                                                            createUserForm.get('confirmPassword').dirty) &&
+                                                            (createUserForm.get('confirmPassword').invalid)}">
+          <label class="control-label" for="confirmPassword">confirm password</label>
+          <input class="form-control"
+                  id = "confirmPassword"
+                  type="password"
+                  placeholder="confirm password"
+                  name="confirmPassword"
+                  formControlName="confirmPassword">
+          <div  class="alert alert-danger" *ngIf="(createUserForm.get('confirmPassword').touched ||
+                                                    createUserForm.get('confirmPassword').dirty) &&
+                                                    (createUserForm.get('confirmPassword').errors)">
+            <span *ngIf="createUserForm.get('confirmPassword').errors && createUserForm.get('confirmPassword').errors.ConfirmPassword">password does not match</span>
+            
+          </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': createUserForm.get('role').invalid}">
+          <label for="role" class="control-label">Role</label>
+          <select id ="role" class="form-control"
+                  (change)="validateRole($event)"
+                  formControlName="role" name="role">
+            <option value="default">SELECT ROLE</option>
+            <option *ngFor="let role of roles" >{{role}}</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="hasRoleError">
+            <span style="color:#fff" *ngIf="createUserForm.get('role').errors && createUserForm.get('role').errors.role">
+              Role is required
+            </span>
+          </div>
+        </div>
+        <h3>
+            <input type="file" (change)="onSelectFile($event)" formControlName="image" name="image">
+            <button style="display:none" class="btn" (click)="uploadImage()">Upload the file</button>
+        </h3>
+        
+
+      
+      <div class="form-group">
+        <button type="submit" [disabled]="createUserForm.invalid" class="btn btn-primary">Save</button>
+        <a [routerLink]="['/users']" class="btn btn-link">Abbrechen</a>
+      </div>
+    </form>
+    
+    
+    
+  </div>
+</div>
